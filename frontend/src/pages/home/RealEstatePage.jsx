@@ -11,7 +11,7 @@ function RealEstatePage() {
   const [inquiryForm, setInquiryForm] = useState({ name: '', phone: '', email: '', interestedIn: 'buy', message: '', contactMethod: 'whatsapp' })
 
   const fetchProperties = usePublicFetch()
-  const { data: propertiesData, isLoading } = useQuery('properties', () => fetchProperties('/api/properties'))
+  const { data: propertiesData, isLoading } = useQuery('properties', () => fetchProperties('/properties'))
 
   const properties = propertiesData?.data || []
   const availableProperties = properties.filter(p => p.status === 'available')

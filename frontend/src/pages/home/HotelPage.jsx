@@ -10,7 +10,7 @@ function HotelPage() {
   const [bookingForm, setBookingForm] = useState({ guestName: '', email: '', phone: '', checkIn: '', checkOut: '', specialRequests: '', paymentMethod: 'whatsapp' })
 
   const fetchRooms = usePublicFetch()
-  const { data: roomsData, isLoading } = useQuery('rooms', () => fetchRooms('/api/rooms'))
+  const { data: roomsData, isLoading } = useQuery('rooms', () => fetchRooms('/rooms'))
 
   const roomTypes = roomsData?.data || []
   const availableRooms = []

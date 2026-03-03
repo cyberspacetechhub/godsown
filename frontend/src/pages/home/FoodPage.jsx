@@ -14,7 +14,7 @@ function FoodPage() {
   const fetchFoods = usePublicFetch()
   const createOrder = usePublicFetch()
 
-  const { data: foodsData, isLoading } = useQuery('foods', () => fetchFoods('/api/foods'))
+  const { data: foodsData, isLoading } = useQuery('foods', () => fetchFoods('/foods'))
 
   const foods = foodsData?.data || []
 

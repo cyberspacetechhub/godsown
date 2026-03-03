@@ -7,8 +7,8 @@ function MinistryPage() {
   const fetchProfiles = usePublicFetch()
   const fetchEvents = usePublicFetch()
   
-  const { data: profilesData, isLoading: profilesLoading } = useQuery('profiles', () => fetchProfiles('/api/profiles'))
-  const { data: eventsData, isLoading: eventsLoading } = useQuery('events', () => fetchEvents('/api/events'))
+  const { data: profilesData, isLoading: profilesLoading } = useQuery('profiles', () => fetchProfiles('/profiles'))
+  const { data: eventsData, isLoading: eventsLoading } = useQuery('events', () => fetchEvents('/events'))
 
   const profiles = profilesData?.data || []
   const eventsFromAPI = eventsData?.data || []
