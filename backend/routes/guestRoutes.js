@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const guestController = require('../controllers/guestController');
-const verifyJWT = require('../middlewares/verifyJWT');
+const verifyJWT = require('../middlewares/verifyJwt');
 
 // Public routes
 router.post('/register', guestController.registerGuest);
