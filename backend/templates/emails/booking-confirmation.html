@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #2196F3; color: white; padding: 20px; text-align: center; }
+    .content { padding: 20px; background: #f9f9f9; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Booking Confirmation</h1>
+    </div>
+    <div class="content">
+      <p>Dear {{guestName}},</p>
+      <p>Your booking has been confirmed!</p>
+      <p><strong>Room Number:</strong> {{roomNumber}}</p>
+      <p><strong>Room Type:</strong> {{roomType}}</p>
+      <p><strong>Check-in Date:</strong> {{checkInDate}}</p>
+      <p><strong>Check-out Date:</strong> {{checkOutDate}}</p>
+      <p>We look forward to welcoming you!</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 Multi-Service Platform. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

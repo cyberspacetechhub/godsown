@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Service Business Platform API</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 48px; margin-bottom: 20px; text-align: center; }
+        .subtitle { text-align: center; font-size: 20px; margin-bottom: 50px; opacity: 0.9; }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .service-card h3 { font-size: 24px; margin-bottom: 15px; }
+        .service-card ul { list-style: none; }
+        .service-card li { padding: 8px 0; opacity: 0.9; }
+        .endpoints {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .endpoints h2 { margin-bottom: 20px; }
+        .endpoint { padding: 10px; margin: 5px 0; background: rgba(0, 0, 0, 0.2); border-radius: 6px; }
+        code { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Multi-Service Business Platform</h1>
+        <p class="subtitle">Comprehensive API for Food, Hotel, Real Estate & Portfolio Services</p>
+        
+        <div class="services">
+            <div class="service-card">
+                <h3>🍔 Food Service</h3>
+                <ul>
+                    <li>Food Management</li>
+                    <li>Order Processing</li>
+                    <li>Customer Management</li>
+                    <li>Payment Integration</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>🏨 Hotel Service</h3>
+                <ul>
+                    <li>Room Management</li>
+                    <li>Guest Management</li>
+                    <li>Booking System</li>
+                    <li>Payment Processing</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>🏠 Real Estate</h3>
+                <ul>
+                    <li>Property Listings</li>
+                    <li>Inquiry Management</li>
+                    <li>Agent Management</li>
+                    <li>Property Assignment</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>🎤 Portfolio Service</h3>
+                <ul>
+                    <li>Artist Profile</li>
+                    <li>Media Gallery</li>
+                    <li>Event Management</li>
+                    <li>Social Integration</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="endpoints">
+            <h2>API Endpoints</h2>
+            <div class="endpoint"><code>GET /api/foods</code> - Get all food items</div>
+            <div class="endpoint"><code>GET /api/rooms</code> - Get all rooms</div>
+            <div class="endpoint"><code>GET /api/properties</code> - Get all properties</div>
+            <div class="endpoint"><code>GET /api/events</code> - Get all events</div>
+            <div class="endpoint"><code>POST /api/orders</code> - Create new order</div>
+            <div class="endpoint"><code>POST /api/bookings</code> - Create new booking</div>
+            <div class="endpoint"><code>POST /api/inquiries</code> - Submit property inquiry</div>
+            <div class="endpoint"><code>POST /api/upload/single</code> - Upload single file</div>
+        </div>
+    </div>
+</body>
+</html>

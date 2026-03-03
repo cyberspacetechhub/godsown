@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #4CAF50; color: white; padding: 20px; text-align: center; }
+    .content { padding: 20px; background: #f9f9f9; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Order Confirmation</h1>
+    </div>
+    <div class="content">
+      <p>Dear {{customerName}},</p>
+      <p>Thank you for your order! Your order has been confirmed.</p>
+      <p><strong>Order ID:</strong> {{orderId}}</p>
+      <p><strong>Order Date:</strong> {{orderDate}}</p>
+      <p><strong>Total Amount:</strong> ${{totalAmount}}</p>
+      <p>We'll notify you when your order is ready for delivery.</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 Multi-Service Platform. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
