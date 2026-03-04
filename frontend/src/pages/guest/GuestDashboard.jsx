@@ -23,7 +23,7 @@ function GuestDashboard() {
   const fetchDashboard = async () => {
     try {
       const token = localStorage.getItem('guestToken')
-      const response = await axios.get(`${API_BASE_URL}/api/guests/dashboard`, {
+      const response = await axios.get(`${API_BASE_URL}/guests/dashboard`, {
         headers: { 'x-api-key': API_KEY, 'Authorization': `Bearer ${token}` }
       })
       setGuest(response.data.data.guest)
@@ -38,7 +38,7 @@ function GuestDashboard() {
   const requestRoomChange = async () => {
     try {
       const token = localStorage.getItem('guestToken')
-      await axios.post(`${API_BASE_URL}/api/guests/room-change`, { reason: roomChangeReason }, {
+      await axios.post(`${API_BASE_URL}/guests/room-change`, { reason: roomChangeReason }, {
         headers: { 'x-api-key': API_KEY, 'Authorization': `Bearer ${token}` }
       })
       alert('Room change request submitted successfully')
@@ -53,7 +53,7 @@ function GuestDashboard() {
     if (!confirm('Are you sure you want to checkout?')) return
     try {
       const token = localStorage.getItem('guestToken')
-      await axios.post(`${API_BASE_URL}/api/guests/checkout`, {}, {
+      await axios.post(`${API_BASE_URL}/guests/checkout`, {}, {
         headers: { 'x-api-key': API_KEY, 'Authorization': `Bearer ${token}` }
       })
       alert('Checkout successful')

@@ -24,7 +24,7 @@ function CreateFood({ open, onClose }) {
         formData.append('file', imageFile)
         formData.append('folder', 'food')
 
-        const uploadResponse = await fetch('/api/upload/single', {
+        const uploadResponse = await fetch('/upload/single', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${auth.token}`,

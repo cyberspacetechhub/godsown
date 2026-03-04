@@ -15,7 +15,7 @@ function StaffLogin() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, form, {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, form, {
         headers: { 'x-api-key': API_KEY }
       })
       

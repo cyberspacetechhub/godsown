@@ -17,7 +17,7 @@ function GuestAuth() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/guests/login`, loginForm, {
+      const response = await axios.post(`${API_BASE_URL}/guests/login`, loginForm, {
         headers: { 'x-api-key': API_KEY }
       })
       localStorage.setItem('guestToken', response.data.data.token)
@@ -32,7 +32,7 @@ function GuestAuth() {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/guests/register`, registerForm, {
+      const response = await axios.post(`${API_BASE_URL}/guests/register`, registerForm, {
         headers: { 'x-api-key': API_KEY }
       })
       localStorage.setItem('guestToken', response.data.data.token)
