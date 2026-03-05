@@ -24,7 +24,7 @@ function CreateFood({ open, onClose }) {
         formData.append('file', imageFile)
         formData.append('folder', 'food')
 
-        const uploadResponse = await fetch('/upload/single', {
+        const uploadResponse = await fetch('/api/upload/single', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${auth.token}`,
@@ -46,6 +46,10 @@ function CreateFood({ open, onClose }) {
         reset()
         setImageFile(null)
         onClose()
+      },
+      onError: (error) => {
+        setUploading(false)
+        console.error('Error creating food:', error)
       }
     }
   )
