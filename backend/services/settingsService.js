@@ -33,10 +33,28 @@ const getSetting = async (key) => {
   return setting ? setting.value : null;
 };
 
+const getWifiSettings = async () => {
+  const wifiSettings = await Settings.find({ 
+    key: { $in: ['wifi_network_name', 'wifi_password', 'wifi_instructions'] } 
+  });
+  
+  const result = {};
+  wifiSettings.forEach(setting => {
+    result[setting.key] = setting.value;
+  });
+  
+  return {
+    networkName: result.wifi_network_name || 'Hotel WiFi',
+    password: result.wifi_password || 'guest123',
+    instructions: result.wifi_instructions || 'Connect to the network and enter the password provided.'
+  };
+};
+
 module.exports = {
   getAllSettings,
   getPublicSettings,
   getSettingsByCategory,
   updateSettings,
-  getSetting
+  getSetting,
+  getWifiSettings
 };

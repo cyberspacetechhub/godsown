@@ -21,7 +21,7 @@ const seedSettings = async () => {
     const count = await Settings.countDocuments();
     if (count === 0) {
       await Settings.insertMany(defaultSettings);
-      console.log('✓ Default settings seeded successfully');
+      // console.log('✓ Default settings seeded successfully');
     } else {
       console.log(`✓ Settings already exist (${count} settings found)`);
     }

@@ -27,7 +27,7 @@ function SystemOverview() {
   const getStats = () => {
     if (!stats) return {}
     
-    console.log('Bookings data:', stats.bookings)
+    // console.log('Bookings data:', stats.bookings)
     
     const totalRooms = stats.rooms.reduce((acc, room) => acc + (room.roomNumbers?.length || 0), 0)
     const availableRooms = stats.rooms.reduce((acc, room) => 
@@ -35,12 +35,12 @@ function SystemOverview() {
     
     const orderRevenue = stats.orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0)
     const bookingRevenue = stats.bookings.reduce((sum, booking) => {
-      console.log(`Booking ${booking._id}: totalAmount = ${booking.totalAmount}`)
+      // console.log(`Booking ${booking._id}: totalAmount = ${booking.totalAmount}`)
       return sum + (booking.totalAmount || 0)
     }, 0)
     const totalRevenue = orderRevenue + bookingRevenue
     
-    console.log('Calculated booking revenue:', bookingRevenue)
+    // console.log('Calculated booking revenue:', bookingRevenue)
     
     return {
       totalRooms,

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { Box, Container, Typography, Grid, Card, CardMedia, CardContent, Button, Tabs, Tab, Chip, Dialog, DialogTitle, DialogContent, DialogActions, TextField, CircularProgress, MenuItem } from '@mui/material'
 import { WhatsApp, AccessTime, Phone, LocationOn } from '@mui/icons-material'
+import { toast } from 'react-toastify'
 import usePublicFetch from '../../hooks/usePublicFetch'
 
 function FoodPage() {
@@ -40,7 +41,7 @@ function FoodPage() {
 
   const openCart = () => {
     if (cart.length === 0) {
-      alert('Your cart is empty. Please add items first.')
+      toast.warning('Your cart is empty. Please add items first.')
       return
     }
     setOrderDialog(true)
@@ -68,7 +69,7 @@ function FoodPage() {
 
   const handleOrderSubmit = async () => {
     if (!orderForm.customerName || !orderForm.phone || cart.length === 0) {
-      alert('Please fill in all required fields and add items to cart')
+      toast.error('Please fill in all required fields and add items to cart')
       return
     }
 
@@ -81,7 +82,7 @@ function FoodPage() {
       setShowCartButton(false)
       setOrderForm({ customerName: '', phone: '', address: '', paymentMethod: 'whatsapp' })
     } else {
-      alert('Payment integration coming soon!')
+      toast.info('Payment integration coming soon!')
     }
   }
 

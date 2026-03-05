@@ -26,7 +26,7 @@ const initializeSocket = (server) => {
   });
 
   io.on('connection', (socket) => {
-    console.log(`User connected: ${socket.userId}`);
+    // console.log(`User connected: ${socket.userId}`);
 
     socket.on('join-shipment', (shipmentId) => {
       socket.join(`shipment-${shipmentId}`);

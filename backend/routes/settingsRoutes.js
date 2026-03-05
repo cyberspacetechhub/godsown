@@ -5,22 +5,8 @@ const verifyJwt = require('../middlewares/verifyJwt');
 const verifyRoles = require('../middlewares/verifyRoles');
 const seedSettings = require('../utils/seedSettings');
 
-router.get('/debug', async (req, res) => {
-  try {
-    const Settings = require('../models/Settings');
-    const count = await Settings.countDocuments();
-    const settings = await Settings.find().limit(5);
-    res.json({ 
-      success: true, 
-      count, 
-      sample: settings,
-      message: `Found ${count} settings in database` 
-    });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
 router.get('/public', settingsController.getPublicSettings);
+router.get('/wifi', settingsController.getWifiSettings);
 router.post('/seed', async (req, res) => {
   try {
     await seedSettings();

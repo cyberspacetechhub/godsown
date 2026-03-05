@@ -55,7 +55,7 @@ function CreateProfile({ open, onClose }) {
     },
     {
       onSuccess: (response) => {
-        console.log('Profile created successfully:', response)
+        // console.log('Profile created successfully:', response)
         queryClient.invalidateQueries('profiles')
         reset()
         setImageFile(null)

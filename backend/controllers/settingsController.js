@@ -20,3 +20,8 @@ exports.getSettingsByCategory = asyncHandler(async (req, res) => {
   const settings = await settingsService.getSettingsByCategory(req.params.category);
   res.status(200).json({ success: true, data: settings });
 });
+
+exports.getWifiSettings = asyncHandler(async (req, res) => {
+  const wifiSettings = await settingsService.getWifiSettings();
+  res.status(200).json({ success: true, data: wifiSettings });
+});

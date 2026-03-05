@@ -21,5 +21,6 @@ router.get('/', guestController.getAllGuests);
 router.get('/:id', guestController.getGuestById);
 router.put('/:id', guestController.updateGuest);
 router.delete('/cleanup', guestController.cleanupOldGuests);
+router.post('/cleanup-checkout', guestController.cleanupCheckedOutGuests);
 
 module.exports = router;

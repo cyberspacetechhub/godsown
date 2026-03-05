@@ -31,7 +31,7 @@ function AdminLayout() {
           ml: isMobile ? 0 : (sidebarCollapsed ? 0 : 0),
           transition: 'margin-left 0.3s ease',
           maxWidth: '100%',
-          px: 3,
+          px: 0,
           pt: 2.5,
           pb: 5,
           overflow: 'hidden'

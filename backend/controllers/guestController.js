@@ -72,7 +72,7 @@ exports.staffRegisterGuest = asyncHandler(async (req, res) => {
       `
     });
   } catch (emailError) {
-    console.error('Email sending failed:', emailError);
+    // Email sending failed silently
   }
 
   res.status(201).json({ success: true, data: guest, message: 'Guest registered and email sent' });
@@ -97,7 +97,7 @@ exports.loginGuest = asyncHandler(async (req, res) => {
 exports.getGuestDashboard = asyncHandler(async (req, res) => {
   const guestId = req.user.id;
   const guest = await Guest.findById(guestId).select('-password');
-  const bookings = await Booking.find({ guest: guestId }).populate('room').sort('-createdAt');
+  const bookings = await Booking.find({ guest: guestId }).sort('-createdAt');
   
   res.status(200).json({ success: true, data: { guest, bookings } });
 });
@@ -134,6 +134,7 @@ exports.checkoutGuest = asyncHandler(async (req, res) => {
   const guest = await Guest.findById(guestId);
   
   guest.status = 'checked-out';
+  guest.roomNumber = null;
   guest.checkOutDate = new Date();
   await guest.save();
 
@@ -142,9 +143,22 @@ exports.checkoutGuest = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, message: 'Checkout successful' });
 });
 
+// Clean up existing checked-out guests with room numbers
+exports.cleanupCheckedOutGuests = asyncHandler(async (req, res) => {
+  const result = await Guest.updateMany(
+    { status: 'checked-out', roomNumber: { $ne: null } },
+    { $set: { roomNumber: null } }
+  );
+  
+  res.status(200).json({ 
+    success: true, 
+    message: `Cleaned up ${result.modifiedCount} checked-out guests with room numbers` 
+  });
+});
+
 exports.getGuestBookings = asyncHandler(async (req, res) => {
   const guestId = req.user.id;
-  const bookings = await Booking.find({ guest: guestId }).populate('room').sort('-createdAt');
+  const bookings = await Booking.find({ guest: guestId }).sort('-createdAt');
   
   res.status(200).json({ success: true, data: bookings });
 });

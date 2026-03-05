@@ -41,10 +41,6 @@ function CreateOrder() {
   const foods = foodData?.data?.data || foodData?.data || []
   const availableFoods = foods.filter(food => food.isAvailable !== false) // Show only available foods
 
-  console.log('Food data:', foodData)
-  console.log('Foods array:', foods)
-  console.log('Available foods:', availableFoods)
-
   const addToCart = (food) => {
     const existingItem = cart.find(item => item._id === food._id)
     if (existingItem) {

@@ -17,7 +17,13 @@ const getUserById = async (id) => {
 };
 
 const updateUser = async (id, updateData) => {
-  const user = await User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+  // First find the user to get their role
+  const existingUser = await User.findById(id);
+  if (!existingUser) throw new AppError('User not found', 404);
+  
+  // Use the appropriate model based on role
+  const Model = { Admin, Guest, Staff }[existingUser.role] || User;
+  const user = await Model.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
   if (!user) throw new AppError('User not found', 404);
   return user;
 };

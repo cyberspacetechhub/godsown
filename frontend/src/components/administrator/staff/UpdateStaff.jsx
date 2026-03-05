@@ -27,11 +27,14 @@ function UpdateStaff({ open, onClose, staff }) {
   }, [staff, open, reset])
 
   const mutation = useMutation(
-    (data) => updateStaff(`/users/${staff._id}`, data, auth.token),
+    (data) => {
+      return updateStaff(`/users/${staff._id}`, data, auth.token)
+    },
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
         queryClient.invalidateQueries('staff')
-        toast.success('Staff updated successfully')
+        queryClient.refetchQueries('staff')
+        toast.success('Staff updated successfully. Staff member should log out and log back in for shift changes to take effect.')
         onClose()
       },
       onError: (error) => {

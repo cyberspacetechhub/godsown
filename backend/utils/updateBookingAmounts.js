@@ -4,7 +4,7 @@ const RoomType = require('../models/hotel-service/Room');
 
 const updateBookingAmounts = async () => {
   try {
-    console.log('Starting booking amount migration...');
+    // console.log('Starting booking amount migration...');
     
     // Find all bookings without totalAmount or with totalAmount = 0
     const bookings = await Booking.find({
@@ -14,7 +14,7 @@ const updateBookingAmounts = async () => {
       ]
     });
 
-    console.log(`Found ${bookings.length} bookings to update`);
+    // console.log(`Found ${bookings.length} bookings to update`);
 
     for (const booking of bookings) {
       try {
@@ -33,7 +33,7 @@ const updateBookingAmounts = async () => {
           // Update the booking
           await Booking.findByIdAndUpdate(booking._id, { totalAmount });
           
-          console.log(`Updated booking ${booking._id}: ${nights} nights × ₦${roomType.pricePerNight} = ₦${totalAmount}`);
+          // console.log(`Updated booking ${booking._id}: ${nights} nights × ₦${roomType.pricePerNight} = ₦${totalAmount}`);
         } else {
           console.log(`Room type not found for booking ${booking._id}`);
         }
@@ -42,7 +42,7 @@ const updateBookingAmounts = async () => {
       }
     }
     
-    console.log('Booking amount migration completed!');
+    // console.log('Booking amount migration completed!');
   } catch (error) {
     console.error('Migration failed:', error);
   }

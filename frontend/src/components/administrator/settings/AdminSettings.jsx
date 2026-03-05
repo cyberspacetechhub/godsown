@@ -20,9 +20,9 @@ function AdminSettings() {
     fetchData('/settings', auth.token)
   )
 
-  console.log('Settings data:', settingsData)
-  console.log('Settings loading:', isLoading)
-  console.log('Settings error:', error)
+  // console.log('Settings data:', settingsData)
+  // console.log('Settings loading:', isLoading)
+  // console.log('Settings error:', error)
 
   const updateSettingsMutation = useMutation(
     (settingsData) => updateData('/settings', settingsData, auth.token),
@@ -37,7 +37,7 @@ function AdminSettings() {
     }
   )
 
-  const allSettings = settingsData?.data.data || []
+  const allSettings = settingsData?.data?.data || []
   
   const categories = {
     general: Array.isArray(allSettings) ? allSettings.filter(s => s.category === 'general') : [],

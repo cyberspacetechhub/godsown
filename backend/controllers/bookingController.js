@@ -74,7 +74,7 @@ exports.assignRoom = asyncHandler(async (req, res) => {
       `
     });
   } catch (emailError) {
-    console.error('Email sending failed:', emailError);
+    // Email sending failed silently
   }
   
   res.status(200).json({ success: true, data: booking, message: 'Room assigned successfully' });

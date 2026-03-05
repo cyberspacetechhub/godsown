@@ -50,7 +50,7 @@ const seedPaymentMethods = async () => {
     );
   }
   
-  console.log('Payment methods seeded');
+  // console.log('Payment methods seeded');
 };
 
 module.exports = seedPaymentMethods;

@@ -7,7 +7,7 @@ const path = require('path');
 // Run every day at 2 AM
 cron.schedule('0 2 * * *', async () => {
   try {
-    console.log('Running guest cleanup job...');
+    // console.log('Running guest cleanup job...');
     
     const oneMonthAgo = new Date();
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
@@ -33,7 +33,7 @@ cron.schedule('0 2 * * *', async () => {
 
       await Guest.deleteMany({ _id: { $in: oldGuests.map(g => g._id) } });
 
-      console.log(`Cleaned up ${oldGuests.length} old guests. Exported to ${filename}`);
+      // console.log(`Cleaned up ${oldGuests.length} old guests. Exported to ${filename}`);
     } else {
       console.log('No old guests to cleanup');
     }

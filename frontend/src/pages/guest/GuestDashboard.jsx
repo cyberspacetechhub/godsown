@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Container, Typography, Grid, Card, CardContent, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Chip, Tabs, Tab } from '@mui/material'
-import { Wifi, ExitToApp, SwapHoriz, CalendarMonth, Hotel, ContentCopy } from '@mui/icons-material'
+import { Wifi, ExitToApp, SwapHoriz, CalendarMonth, Hotel, ContentCopy, Add } from '@mui/icons-material'
+import { toast } from 'react-toastify'
 import axios from 'axios'
 import GuestWiFi from './GuestWiFi'
 
@@ -13,6 +14,7 @@ function GuestDashboard() {
   const [bookings, setBookings] = useState([])
   const [tabValue, setTabValue] = useState(0)
   const [roomChangeDialog, setRoomChangeDialog] = useState(false)
+  const [checkoutDialog, setCheckoutDialog] = useState(false)
   const [roomChangeReason, setRoomChangeReason] = useState('')
   const navigate = useNavigate()
 
@@ -29,7 +31,9 @@ function GuestDashboard() {
       setGuest(response.data.data.guest)
       setBookings(response.data.data.bookings)
     } catch (error) {
-      if (error.response?.status === 401) {
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        localStorage.removeItem('guestToken')
+        localStorage.removeItem('guestData')
         navigate('/guest/login')
       }
     }
@@ -41,28 +45,28 @@ function GuestDashboard() {
       await axios.post(`${API_BASE_URL}/guests/room-change`, { reason: roomChangeReason }, {
         headers: { 'x-api-key': API_KEY, 'Authorization': `Bearer ${token}` }
       })
-      alert('Room change request submitted successfully')
+      toast.success('Room change request submitted successfully')
       setRoomChangeDialog(false)
       setRoomChangeReason('')
     } catch (error) {
-      alert(error.response?.data?.message || 'Failed to submit request')
+      toast.error(error.response?.data?.message || 'Failed to submit request')
     }
   }
 
   const handleCheckout = async () => {
-    if (!confirm('Are you sure you want to checkout?')) return
     try {
       const token = localStorage.getItem('guestToken')
       await axios.post(`${API_BASE_URL}/guests/checkout`, {}, {
         headers: { 'x-api-key': API_KEY, 'Authorization': `Bearer ${token}` }
       })
-      alert('Checkout successful')
+      toast.success('Checkout successful')
       localStorage.removeItem('guestToken')
       localStorage.removeItem('guestData')
       navigate('/guest/login')
     } catch (error) {
-      alert(error.response?.data?.message || 'Checkout failed')
+      toast.error(error.response?.data?.message || 'Checkout failed')
     }
+    setCheckoutDialog(false)
   }
 
   const handleLogout = () => {
@@ -120,12 +124,17 @@ function GuestDashboard() {
 
             <Grid container spacing={3} sx={{ mb: 4 }}>
               <Grid item xs={12} sm={6} md={3}>
+                <Button variant="contained" fullWidth startIcon={<Add />} onClick={() => navigate('/hotel')} sx={{ bgcolor: '#C6A75E', color: '#3B2A1E', py: 2, '&:hover': { bgcolor: '#B89650' } }}>
+                  Book Room
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
                 <Button variant="contained" fullWidth startIcon={<SwapHoriz />} onClick={() => setRoomChangeDialog(true)} sx={{ bgcolor: '#3b82f6', color: 'white', py: 2, '&:hover': { bgcolor: '#2563eb' } }}>
                   Request Room Change
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Button variant="contained" fullWidth startIcon={<ExitToApp />} onClick={handleCheckout} sx={{ bgcolor: '#ef4444', color: 'white', py: 2, '&:hover': { bgcolor: '#dc2626' } }}>
+                <Button variant="contained" fullWidth startIcon={<ExitToApp />} onClick={() => setCheckoutDialog(true)} sx={{ bgcolor: '#ef4444', color: 'white', py: 2, '&:hover': { bgcolor: '#dc2626' } }}>
                   Checkout
                 </Button>
               </Grid>
@@ -141,7 +150,7 @@ function GuestDashboard() {
                     <CardContent>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                         <Typography variant="h6" sx={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600 }}>
-                          Room {booking.room?.roomNumber}
+                          Room {booking.roomNumber}
                         </Typography>
                         <Chip label={booking.status} size="small" sx={{ bgcolor: booking.status === 'confirmed' ? '#25D366' : '#666', color: 'white' }} />
                       </Box>
@@ -164,6 +173,23 @@ function GuestDashboard() {
 
         {tabValue === 1 && <GuestWiFi />}
       </Container>
+
+      <Dialog open={checkoutDialog} onClose={() => setCheckoutDialog(false)} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 700, color: '#3B2A1E' }}>
+          Confirm Checkout
+        </DialogTitle>
+        <DialogContent>
+          <Typography sx={{ fontFamily: "'Poppins', sans-serif", color: '#666', pt: 2 }}>
+            Are you sure you want to checkout? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ p: 3 }}>
+          <Button onClick={() => setCheckoutDialog(false)} sx={{ color: '#666' }}>Cancel</Button>
+          <Button variant="contained" onClick={handleCheckout} sx={{ bgcolor: '#ef4444', color: 'white', '&:hover': { bgcolor: '#dc2626' } }}>
+            Checkout
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Dialog open={roomChangeDialog} onClose={() => setRoomChangeDialog(false)} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 700, color: '#3B2A1E' }}>

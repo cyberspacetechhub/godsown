@@ -12,17 +12,17 @@ function ProfileList({ onEdit, onDelete }) {
     fetchData('/profiles', auth.token)
   )
 
-  console.log('Profiles data:', profiles)
-  console.log('Profiles loading:', isLoading)
-  console.log('Profiles error:', error)
+  // console.log('Profiles data:', profiles)
+  // console.log('Profiles loading:', isLoading)
+  // console.log('Profiles error:', error)
 
   if (isLoading) return <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>
   if (error) return <Typography color="error">Error loading profiles: {error.message}</Typography>
 
   const profilesList = Array.isArray(profiles?.data?.data) ? profiles.data.data : []
   
-  console.log('Processed profiles list:', profilesList)
-  console.log('Is profilesList an array?', Array.isArray(profilesList))
+  // console.log('Processed profiles list:', profilesList)
+  // console.log('Is profilesList an array?', Array.isArray(profilesList))
 
   return (
     <Box>
