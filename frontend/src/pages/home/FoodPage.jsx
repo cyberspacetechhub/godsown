@@ -133,7 +133,7 @@ function FoodPage() {
               {filteredFoods.map((item) => (
                 <Grid item xs={12} sm={6} md={4} key={item._id}>
                   <Card sx={{ borderRadius: 3, transition: 'all 0.3s', '&:hover': { transform: 'translateY(-8px)', boxShadow: '0 12px 32px rgba(198, 167, 94, 0.2)' } }}>
-                    <CardMedia component="img" height="220" image={item.imageUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80'} alt={item.name} />
+                    <CardMedia component="img" height="220" image={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80'} alt={item.name} />
                     <CardContent sx={{ p: 3 }}>
                       <Typography variant="h6" sx={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: '#3B2A1E', mb: 1 }}>
                         {item.name}
@@ -168,7 +168,7 @@ function FoodPage() {
               <Grid item xs={12} md={4} key={dish._id}>
                 <Card sx={{ borderRadius: 3, position: 'relative', overflow: 'hidden', transition: 'all 0.3s', '&:hover': { transform: 'scale(1.03)', boxShadow: '0 16px 40px rgba(198, 167, 94, 0.25)' } }}>
                   <Chip label="Featured" sx={{ position: 'absolute', top: 16, right: 16, bgcolor: '#C6A75E', color: '#3B2A1E', fontFamily: "'Poppins', sans-serif", fontWeight: 600, zIndex: 1 }} />
-                  <CardMedia component="img" height="300" image={dish.imageUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80'} alt={dish.name} />
+                  <CardMedia component="img" height="300" image={dish.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80'} alt={dish.name} />
                   <CardContent sx={{ p: 3, textAlign: 'center' }}>
                     <Typography variant="h5" sx={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: '#3B2A1E', mb: 2 }}>
                       {dish.name}
