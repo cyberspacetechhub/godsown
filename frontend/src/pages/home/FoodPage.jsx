@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Box, Container, Typography, Grid, Card, CardMedia, CardContent, Button, Tabs, Tab, Chip, Dialog, DialogTitle, DialogContent, DialogActions, TextField, CircularProgress, MenuItem } from '@mui/material'
+import { Box, Container, Typography, Grid, Card, CardMedia, CardContent, Button, Tabs, Tab, Chip, Dialog, DialogTitle, DialogContent, DialogActions, TextField, CircularProgress, MenuItem, useMediaQuery, useTheme } from '@mui/material'
 import { WhatsApp, AccessTime, Phone, LocationOn } from '@mui/icons-material'
 import { toast } from 'react-toastify'
 import usePublicFetch from '../../hooks/usePublicFetch'
@@ -86,6 +86,8 @@ function FoodPage() {
     }
   }
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box>
       {/* Floating Cart Button */}
@@ -115,7 +117,16 @@ function FoodPage() {
           <Typography variant="h2" sx={{ fontFamily: "'Playfair Display', serif", fontSize: { xs: '2rem', md: '3rem' }, fontWeight: 700, color: '#3B2A1E', textAlign: 'center', mb: 6 }}>
             Our Menu
           </Typography>
-          <Tabs value={activeTab} onChange={(e, val) => setActiveTab(val)} centered sx={{ mb: 6, '& .MuiTab-root': { fontFamily: "'Poppins', sans-serif", fontSize: '1.1rem', fontWeight: 600, color: '#222222', '&.Mui-selected': { color: '#C6A75E' } }, '& .MuiTabs-indicator': { bgcolor: '#C6A75E', height: 3 } }}>
+          <Tabs 
+            value={activeTab} 
+            onChange={(e, val) => setActiveTab(val)}
+            variant={isMobile ? "scrollable" : "standard"}
+            scrollButtons={isMobile ? "auto" : false}
+            centered={!isMobile}
+            allowScrollButtonsMobile
+            sx={{ mb: 6, '& .MuiTab-root': { fontFamily: "'Poppins', sans-serif", fontSize: '1.1rem', fontWeight: 600, color: '#222222', '&.Mui-selected': { color: '#C6A75E' } }, '& .MuiTabs-indicator': { bgcolor: '#C6A75E', height: 3 } }}
+
+          >
             {categories.map((cat, idx) => (
               <Tab key={idx} label={cat.name} />
             ))}
@@ -164,7 +175,7 @@ function FoodPage() {
             Featured Dishes
           </Typography>
           <Grid container spacing={4}>
-            {foods.filter(f => f.category === 'combo deals').slice(0, 3).map((dish) => (
+            {foods.filter(f => f?.isFeatured === true).slice(0, 3).map((dish) => (
               <Grid item xs={12} md={4} key={dish._id}>
                 <Card sx={{ borderRadius: 3, position: 'relative', overflow: 'hidden', transition: 'all 0.3s', '&:hover': { transform: 'scale(1.03)', boxShadow: '0 16px 40px rgba(198, 167, 94, 0.25)' } }}>
                   <Chip label="Featured" sx={{ position: 'absolute', top: 16, right: 16, bgcolor: '#C6A75E', color: '#3B2A1E', fontFamily: "'Poppins', sans-serif", fontWeight: 600, zIndex: 1 }} />
